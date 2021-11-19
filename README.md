@@ -63,6 +63,3 @@ These scripts were developed based on:
 - Most of the ideas for multilabel image classification using transfer learning where based on [this example](https://learnopencv.com/multi-label-image-classification-with-pytorch/) by Dmitry Retinskiy.
 - Part of the transfer learning is based on this [pytorch tutorial](https://pytorch.org/tutorials/beginner/finetuning_torchvision_models_tutorial.html#finetuning-torchvision-models) by Nathan Inkawhich.
 - Pytorch main structure from Stanford [CS230 course](https://github.com/cs230-stanford/cs230-code-examples/tree/master/pytorch/vision).
-
-README.md
-Displaying README.md.
