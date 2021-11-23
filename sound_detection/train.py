@@ -180,7 +180,13 @@ if __name__ == '__main__':
     logging.info('Size of validation dataset: {}'.format(len(val_dl.dataset)))
 
     # Define the model and optimizer
-    model = net.BinaryResNetModel(params).cuda() if params.cuda else net.BinaryResNetModel(params)
+    if params.model_name == 'mobilenet':
+        model = net.BinaryMobileNetModel(params).cuda() if params.cuda else net.BinaryMobileNetModel(params)
+    elif params.model_name =='resnet':
+        model = net.BinaryResNetModel(params).cuda() if params.cuda else net.BinaryResNetModel(params)
+    else:
+        raise NameError('Model name not found')
+    
     optimizer = optim.Adam(model.parameters(), lr=params.learning_rate)
     logging.info('Model: {}'.format(model.__class__.__name__))
     logging.info('Optimizer: {}'.format(optimizer.__class__.__name__))

@@ -29,6 +29,14 @@ python train.py --data_dir <location of data directory> --model_dir experiments/
 columns: file_path, insects, birds. The file_path has the full path where the audio files
 are located (*.wav).
 
+Once trained, the model can be used to make predictions on new data. Usually you will 
+want to load the model and weights that gave the best validation classification metrics:
+
+```
+python inference.py --data_dir <location of data directory> --model_dir --restore_file best
+
+```
+
 ### Adapt to new soundmarks
 
 You will need at least 2 datasets (train and validation), usually in csv format 

@@ -131,7 +131,7 @@ class SoundDetectionInfer(Dataset):
         """
         super().__init__()
         self.filenames = os.listdir(data_dir)
-        self.filenames = [os.path.join(data_dir, f) for f in self.filenames if f.endswith('.jpg')]
+        self.filenames = [os.path.join(data_dir, f) for f in self.filenames if f.endswith('.wav')]
         self.labels = [os.path.basename(filename) for filename in self.filenames]
         self.transform = transform
 
@@ -149,7 +149,22 @@ class SoundDetectionInfer(Dataset):
             image: (Tensor) transformed image
             label: (int) corresponding label of image
         """
-        image = Image.open(self.filenames[idx])  # PIL image
+        target_fs = 24000  # target fs of project
+        spectro_nperseg = 512
+        spectro_noverlap = 256
+        db_range = 80
+
+        # preprocess sound
+        s, fs = sound.load(self.filenames[idx])
+        s = sound.resample(s, fs, target_fs)
+        #s = sound.normalize(s, max_db=0)
+        Sxx, tn, fn, ext = sound.spectrogram(
+            s, fs=target_fs, nperseg=spectro_nperseg, noverlap=spectro_noverlap)
+        Sxx = util.power2dB(Sxx, db_range, db_gain=20)
+
+        # treat as image
+        image = 255 * (Sxx + db_range) / db_range
+        image = Image.fromarray(np.uint8(image))
         image = image.convert('RGB') # treat grayscale images as RGB
         image = self.transform(image)
         return image, self.labels[idx]
@@ -172,9 +187,11 @@ def fetch_dataloader(types, data_dir, params):
     dataloaders = {}
 
     if types==['infer']:
-        dl = DataLoader(SoundDetectionInfer(data_dir, eval_transformer), batch_size=params.batch_size, shuffle=False,
-                                            num_workers=params.num_workers,
-                                            pin_memory=params.cuda)
+        dl = DataLoader(SoundDetectionInfer(data_dir, eval_transformer), 
+                        batch_size=params.batch_size, 
+                        shuffle=False,
+                        num_workers=params.num_workers,
+                        pin_memory=params.cuda)
         dataloaders['infer'] = dl
 
     for split in ['train', 'val', 'test']:
