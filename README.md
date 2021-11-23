@@ -1,31 +1,33 @@
 # Soundscape and audio classification
  
-This repository compiles scripts to tag multiple soundmarks in audio recordings using
-transfer learning. For training, the model receives spectrograms and multiple labels 
-with presence and absence of sounds. This script uses torchvision pre-trained models on 
-ImageNet, allowing have decent classification performance with few samples.
+This repository compiles proyect templates to use deep learning models on passive
+acoustic recordings to (1) detect soundmarks and (2) tag multiple soundmarks 
+(multilabel scenario). This repository uses torchvision pre-trained models on 
+ImageNet, providing high classification performance with few samples and low 
+computational resources.
 
-The main structure of the project was adatped from the Stanford CS230 course 
+The main structure of the project templates was adatped from the Stanford CS230 course 
 [repository](https://github.com/cs230-stanford/cs230-code-examples/tree/master/pytorch/vision).
 
 ## Getting Started
 
 ### Prerequisites
 All scripts have been tested in Python (v3.7.11), using torch (v1.9.0) and torchvision (v0.10.0).
+Preprocessing of audio (load, resample and spectrogram computation) is performed using scikit-maad.
 Other dependencies are specified in the file `requirements.txt`. 
 
 ### Installing and Running
 
-To train the model, run on the console:
+To train the base model, run on the console:
+
 ```
 python train.py --data_dir <location of data directory> --model_dir experiments/base_model
 ```
 
-- The file *config.json* in the `experiments` directory has all the configuration options required for training.
+- The file *config.json* in the `experiments/base_model` directory has all the configuration options required for training.
 - The example dataset is splitted into train and validation dataset and tree main 
-columns: file_path, insects, birds. The file_path has the full path where the spectrogram
-is located (*.jpg). The columns insects and birds have a binary value, 0 for absence and 1
-for presence.
+columns: file_path, insects, birds. The file_path has the full path where the audio files
+are located (*.wav).
 
 ### Adapt to new soundmarks
 
@@ -47,7 +49,8 @@ To make further adaptation, read the CS230 tutorial to understand the structure 
 - Implement configuration for: input_size, frequency for validation, frequency for checkpoints.
 - Facilitate choosing between dataset and models from the configuration file.
 - Add a simple dataset to test the implementation.
-
+- Adapt the `inference.py` script to easily test the model on new data
+- Fix multilabel model to have sigmoig signal and adapt the loss function
 
 ## Authors
 

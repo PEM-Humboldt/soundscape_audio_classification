@@ -1,4 +1,4 @@
-# Multi label transferlearning for soundscapes 
+# Sound detection
  
 This repository compiles scripts to tag multiple soundmarks in audio recordings using
 transfer learning. For training, the model receives spectrograms and multiple labels 
