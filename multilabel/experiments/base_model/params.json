@@ -1,0 +1,10 @@
+{
+    "learning_rate": 1e-3,
+    "batch_size": 32,
+    "num_epochs": 25,
+    "save_summary_steps": 100,
+    "num_workers": 0,
+    "data_dir": "/Volumes/Audiolib/ML_datasets/soundscape_multilabel_bst/mannot/",
+    "n_insect_classes": 2,
+    "n_bird_classes": 2
+}

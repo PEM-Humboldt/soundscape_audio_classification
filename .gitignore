@@ -1,0 +1,12 @@
+# Ignore OSX database files
+*.DS_Store
+
+# Ignore compiled python files
+*.pyc
+
+# Ignore logs and trained models
+*.log
+best.pth.tar
+last.pth.tar
+metrics_val_best_weights.json
+metrics_val_last_weights.json
