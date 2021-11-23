@@ -1,0 +1,8 @@
+﻿Model,Dataset,Pretrained ImageNet,Learning Rate,Batch size,Freeze backbone layers,Epoch,Max F1,Precision,Recall,Obs
+MobileNet,BOAPRA,TRUE,0.001,32,﻿num_layer < 0,13,0.978,1,0.966,no freezed layer
+MobileNet,BOAPRA,TRUE,0.001,32,﻿num_layer < 5,23,0.948,1,0.928,half freezed layers
+MobileNet,BOAPRA,TRUE,0.001,32,﻿num_layer < 19,17,0.729,0.889,0.765,feature extract only. Training does not reach high values.
+,,,,,,,,,,
+ResNet18,BOAPRA,TRUE,0.001,32,﻿num_layer < 0,23,0.963,1,0.917,no freezed layer
+ResNet18,BOAPRA,TRUE,0.001,32,﻿num_layer < 5,12,0.957,1,0.941,half freezed layers
+ResNet18,BOAPRA,TRUE,0.001,32,﻿num_layer < 10,10,0.802,0.869,0.845,feature extract only
