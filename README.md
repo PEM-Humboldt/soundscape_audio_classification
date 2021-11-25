@@ -45,11 +45,12 @@ with the names `train_dsname.csv` and `val_dsname.csv`. Then:
     1. Format the dataset and create a custom dataloader class. `data_loader.py`
     2. Adapt the torchvision pre-trained model to have multiple outputs. `net.py`
     3. Modify loss function and metrics to include more outputs. `net.py`.
-    4. Finally, run training script:
+    4. Train the model using the command:
     
 ```
 python train.py --data_dir <location of data directory> --model_dir experiments/base_model
 ```
+
 To make further adaptation, read the CS230 tutorial to understand the structure of the project.
 
 ## TODO
