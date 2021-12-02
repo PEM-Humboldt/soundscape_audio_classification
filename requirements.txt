@@ -7,3 +7,4 @@ torchvision
 pandas
 scipy
 scikit-maad
+scikit-learn
